@@ -50,7 +50,7 @@ example {P : X → Prop} {x : X} (h : ∀ᶠ y in 𝓝 x, P y) : ∀ᶠ y in �
 
 example {α : Type*} (n : α → Filter α) (H₀ : ∀ a, pure a ≤ n a)
     (H : ∀ a : α, ∀ p : α → Prop, (∀ᶠ x in n a, p x) → ∀ᶠ y in n a, ∀ᶠ x in n y, p x) :
-    ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' :=
+    ∀ a, ∀ s ∈ n a, ∃ t ∈ n a, t ⊆ s ∧ ∀ a' ∈ t, s ∈ n a' := by
   sorry
 
 end
@@ -143,8 +143,10 @@ example {x : X} {F : Filter X} {G : Filter Y} (H : ClusterPt x F) {f : X → Y}
 example [TopologicalSpace Y] {f : X → Y} (hf : Continuous f) {s : Set X} (hs : IsCompact s) :
     IsCompact (f '' s) := by
   intro F F_ne F_le
-  have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by sorry
-  have Hne : (𝓟 s ⊓ comap f F).NeBot := by sorry
+  have map_eq : map f (𝓟 s ⊓ comap f F) = 𝓟 (f '' s) ⊓ F := by
+    sorry
+  have Hne : (𝓟 s ⊓ comap f F).NeBot := by
+    sorry
   have Hle : 𝓟 s ⊓ comap f F ≤ 𝓟 s := inf_le_left
   sorry
 

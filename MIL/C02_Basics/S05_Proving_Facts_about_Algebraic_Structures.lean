@@ -34,22 +34,40 @@ variable (x y z : α)
 #check (sup_le : x ≤ z → y ≤ z → x ⊔ y ≤ z)
 
 example : x ⊓ y = y ⊓ x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [inf_comm]
 
 example : x ⊓ y ⊓ z = x ⊓ (y ⊓ z) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [inf_assoc]
 
 example : x ⊔ y = y ⊔ x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [sup_comm]
 
 example : x ⊔ y ⊔ z = x ⊔ (y ⊔ z) := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  rw [sup_assoc]
 
 theorem absorb1 : x ⊓ (x ⊔ y) = x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [ge_iff_le, le_sup_left, inf_of_le_left]
 
 theorem absorb2 : x ⊔ x ⊓ y = x := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [ge_iff_le, inf_le_left, sup_of_le_left]
 
 end
 
@@ -85,13 +103,22 @@ variable (a b c : R)
 #check (mul_nonneg : 0 ≤ a → 0 ≤ b → 0 ≤ a * b)
 
 example (h : a ≤ b) : 0 ≤ b - a := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [sub_nonneg]
 
 example (h: 0 ≤ b - a) : a ≤ b := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  simp_all only [sub_nonneg]
 
 example (h : a ≤ b) (h' : 0 ≤ c) : a * c ≤ b * c := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst
+  exact mul_le_mul_of_nonneg_right h h'
 
 end
 
@@ -104,7 +131,9 @@ variable (x y z : X)
 #check (dist_triangle x y z : dist x z ≤ dist x y + dist y z)
 
 example (x y : X) : 0 ≤ dist x y := by
-  sorry
+  -- suggest_tactics
+  -- aesop?
+  rename_i inst x_1 y_1
+  exact dist_nonneg
 
 end
-
