@@ -1,10 +1,14 @@
 import Mathlib.Data.Nat.Basic
-import LeanInfer
-import Aesop
+import Mathlib.Data.Real.Basic
 
+-- Our trained model can be accessed via a Lean package.
+import LeanCopilot
+import Aesop
 #init_llm_aesop
 
 open Nat
+
+namespace Hidden
 
 def divides (m n : ℕ) : Bool :=
   n % m = 0
@@ -15,7 +19,7 @@ def divides (m n : ℕ) : Bool :=
 def fib : ℕ → ℕ
 | 0 => 0
 | 1 => 1
-| (n + 2) => fib n + fib (n + 1)
+| n + 2 => fib n + fib (n + 1)
 
 #eval fib 2
 #eval fib 3
@@ -23,8 +27,6 @@ def fib : ℕ → ℕ
 #eval fib 5
 #eval fib 6
 #eval fib 7
-
-namespace Hidden
 
 def gcd : ℕ → ℕ → ℕ
 | 0, y => y
@@ -35,22 +37,10 @@ decreasing_by apply Nat.mod_lt ; simp  -- Prove `gcd` terminates.
 #eval gcd 20 20
 
 theorem gcd_self (n : ℕ) : gcd n n = n := by
-  cases n
-  · unfold gcd
-    rfl
-  · unfold gcd
-    rw [mod_self]
-    unfold gcd
-    rfl
-
-theorem gcd_self' (n : ℕ) : gcd n n = n := by
-  cases n <;> simp [gcd, mod_self]
-
-theorem gcd_self'' (n : ℕ) : gcd n n = n := by
-  -- aesop?
-  cases n
-  · simp_all only [zero_eq]
+  unfold gcd
+  split
+  · simp_all only
+  · simp_all only [mod_self]
     apply Eq.refl
-  · simp [gcd]
 
 end Hidden

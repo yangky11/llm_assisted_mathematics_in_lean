@@ -1,7 +1,7 @@
 import Mathlib.Tactic
-import LeanInfer
+import LeanCopilot
 import Aesop
 
-#init_llm_aesop
+#configure_llm_aesop
 
 set_option warningAsError false
